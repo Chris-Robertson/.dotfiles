@@ -6,6 +6,9 @@ alias ....="cd ../../.."
 
 # Config files
 alias zconf="vim ~/.zshrc"
+alias aconf="vim ~/.alias"
+alias vimconf="vim ~/.vimrc"
+
 -='cd -'
 ...=../..
 ....=../../..
