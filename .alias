@@ -161,7 +161,7 @@ gupv='git pull --rebase -v'
 gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 hidefiles='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
-history='fc -l 1'
+#history='fc -l 1' #gives error
 l='ls -lah'
 la='ls -lAh'
 ll='ls -lh'
@@ -178,3 +178,7 @@ showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killa
 which-command=whence
 x=extract
 z='_z 2>&1'
+
+# Scripts
+#---------
+weather="curl -4 wttr.in" # Prints the weather forcast in the terminal
