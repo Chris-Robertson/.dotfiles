@@ -181,4 +181,4 @@ z='_z 2>&1'
 
 # Scripts
 #---------
-weather="curl -4 wttr.in" # Prints the weather forcast in the terminal
+weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
