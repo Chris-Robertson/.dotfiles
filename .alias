@@ -9,11 +9,11 @@ alias zconf="vim ~/.zshrc"
 alias aconf="vim ~/.alias"
 alias vimconf="vim ~/.vimrc"
 
--='cd -'
-...=../..
-....=../../..
-.....=../../../..
-......=../../../../..
+#alias -='cd -'
+#...=../..
+#....=../../..
+#.....=../../../..
+#......=../../../../..
 1='cd -'
 2='cd -2'
 3='cd -3'
@@ -52,12 +52,12 @@ gbsg='git bisect good'
 gbsr='git bisect reset'
 gbss='git bisect start'
 gc='git commit -v'
-'gc!'='git commit -v --amend'
+#'gc!'='git commit -v --amend'
 gca='git commit -v -a'
-'gca!'='git commit -v -a --amend'
+#'gca!'='git commit -v -a --amend'
 gcam='git commit -a -m'
-'gcan!'='git commit -v -a --no-edit --amend'
-'gcans!'='git commit -v -a -s --no-edit --amend'
+#'gcan!'='git commit -v -a --no-edit --amend'
+#'gcans!'='git commit -v -a -s --no-edit --amend'
 gcb='git checkout -b'
 gcd='git checkout develop'
 gcf='git config --list'
@@ -65,7 +65,7 @@ gcl='git clone --recursive'
 gclean='git clean -fd'
 gcm='git checkout master'
 gcmsg='git commit -m'
-'gcn!'='git commit -v --no-edit --amend'
+#'gcn!'='git commit -v --no-edit --amend'
 gco='git checkout'
 gcount='git shortlog -sn'
 gcp='git cherry-pick'
@@ -90,7 +90,7 @@ ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 ghh='git help'
 gignore='git update-index --assume-unchanged'
 gignored='git ls-files -v | grep "^[[:lower:]]"'
-git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
+#git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
 gk='\gitk --all --branches'
 gke='\gitk --all $(git log -g --pretty=%h)'
 gl='git pull'
@@ -173,12 +173,12 @@ please=sudo
 po=popd
 pu=pushd
 rd=rmdir
-run-help=man
+#run-help=man
 showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-which-command=whence
+#which-command=whence
 x=extract
 z='_z 2>&1'
 
 # Scripts
 #---------
-weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
+alias weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
