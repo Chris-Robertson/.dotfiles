@@ -60,8 +60,8 @@ source $ZSH/oh-my-zsh.sh
 # include z
 . /usr/local/etc/profile.d/z.sh
 
-# random quote on startup
-quote
+# random quote on startup, adds time to terminal startup
+#quote
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
