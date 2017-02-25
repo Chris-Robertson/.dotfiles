@@ -12,20 +12,30 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Plugin 'scrooloose/nerdcommenter'
+Plugin 'christoomey/vim-sort-motion'
+Plugin 'christoomey/vim-system-copy'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'kana/vim-textobj-entire'
+Plugin 'kana/vim-textobj-indent'
+Plugin 'kana/vim-textobj-line'
+Plugin 'kana/vim-textobj-user'
+Plugin 'mattn/emmet-vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'rizzatti/dash.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'svermeulen/vim-easyclip'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'morhetz/gruvbox'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'rizzatti/dash.vim'
-Plugin 'mattn/emmet-vim'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -147,3 +157,6 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 "
+
+" Sets the sort-motion plugin to be case-insensitive
+let g:sort_motion_flags = "i"
