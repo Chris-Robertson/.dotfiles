@@ -8,6 +8,7 @@ alias ....="cd ../../.."
 alias zconf="vim ~/.zshrc"
 alias aconf="vim ~/.alias"
 alias vimconf="vim ~/.vimrc"
+alias tmuxconf="vim ~/.tmux.conf"
 
 #alias -='cd -'
 #...=../..
