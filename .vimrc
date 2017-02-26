@@ -100,22 +100,23 @@ autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Other options "
 """""""""""""""""
-set encoding=utf-8
-set scrolloff=3
 set autoindent
-set showmode
-set showcmd
-set hidden
-set wildmenu
-set wildmode=list:longest
-set visualbell
-set cursorline
-set ttyfast
-set ruler
 set backspace=indent,eol,start
+set cursorline
+set encoding=utf-8
+set hidden
+set hlsearch
 set laststatus=2
 set relativenumber
+set ruler
+set scrolloff=3
+set showcmd
+set showmode
+set ttyfast
 set undofile
+set visualbell
+set wildmenu
+set wildmode=list:longest
 
 " prevents security exploits with modelines
 set modelines=0
@@ -160,3 +161,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Sets the sort-motion plugin to be case-insensitive
 let g:sort_motion_flags = "i"
+
+"This unsets the 'last search pattern' register by hitting return
+nnoremap <CR> :noh<CR><CR>
