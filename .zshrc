@@ -93,9 +93,3 @@ source $ZSH/oh-my-zsh.sh
 source ~/.alias
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
-
-# Set starting directry #
-#########################
-
-cd ~/Google\ Drive/Projects/
-
