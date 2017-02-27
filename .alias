@@ -180,6 +180,8 @@ showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killa
 x=extract
 z='_z 2>&1'
 
+alias tmux="TERM=screen-256color-bce tmux"
+
 # Scripts
 #---------
 alias weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
