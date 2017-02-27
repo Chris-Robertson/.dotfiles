@@ -112,6 +112,7 @@ set hidden
 set hlsearch
 set laststatus=2
 set relativenumber
+set number
 set ruler
 set scrolloff=3
 set showcmd
