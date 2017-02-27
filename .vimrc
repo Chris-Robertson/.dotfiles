@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'christoomey/vim-sort-motion'
-Plugin 'christoomey/vim-system-copy'
+" Plugin 'christoomey/vim-system-copy'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kana/vim-textobj-entire'
@@ -26,7 +26,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'svermeulen/vim-easyclip'
+" Plugin 'svermeulen/vim-easyclip'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -60,6 +60,10 @@ nnoremap <leader>1 yypVr
 " Close syntastic error window
 nnoremap <leader>cl :lclose<CR>
 nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>d /def<CR>
+
+nnoremap <leader>sn :lnext<cr>
+nnoremap <leader>sp :lprev<cr>
 
 " Keymappings "
 """""""""""""""
