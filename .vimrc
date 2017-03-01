@@ -12,9 +12,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Plugin 'scrooloose/nerdcommenter'
-Plugin 'christoomey/vim-sort-motion'
 " Plugin 'christoomey/vim-system-copy'
+" Plugin 'scrooloose/nerdcommenter'
+" Plugin 'svermeulen/vim-easyclip'
+Plugin 'christoomey/vim-sort-motion'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kana/vim-textobj-entire'
@@ -26,7 +28,6 @@ Plugin 'morhetz/gruvbox'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'svermeulen/vim-easyclip'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -51,7 +52,7 @@ call vundle#end()            " required
 
 " Leader Key "
 """"""""""""""
-let mapleader = ","
+let mapleader = " "
 
 " Leader Commands "
 """""""""""""""""""
@@ -89,7 +90,7 @@ colorscheme gruvbox
 " Airline status bar theme "
 """"""""""""""""""""""""""""
 let g:airline_powerline_fonts = 1 "enable powerline font
-let g:airline_theme='cobalt2'
+let g:airline_theme='base16'
 
 " Tabs "
 """"""""
