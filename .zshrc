@@ -93,3 +93,6 @@ source $ZSH/oh-my-zsh.sh
 source ~/.alias
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+
+# Enables vi-style commands in the shell
+set -o vi
