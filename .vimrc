@@ -3,6 +3,8 @@ filetype on                  " required
 filetype indent on
 filetype plugin on
 
+" export PATH="$PATH:$HOME/.rvm/bin"
+set encoding=utf8
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -15,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'christoomey/vim-system-copy'
 " Plugin 'scrooloose/nerdcommenter'
 " Plugin 'svermeulen/vim-easyclip'
+Plugin '907th/vim-auto-save'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -32,12 +35,20 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-rails'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-syntastic/syntastic'
-
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'ianks/vim-tsx'
+" Plugin 'Quramy/tsuquyomi'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+" Must load last
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tpope/vim-obsession'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -60,7 +71,8 @@ let mapleader = " "
 nnoremap <leader>1 yypVr
 " Close syntastic error window
 nnoremap <leader>cl :lclose<CR>
-nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>n :NERDTreeFind<CR>
+nnoremap <Tab><Tab> :NERDTreeToggle<CR>
 nnoremap <leader>d /def<CR>
 
 nnoremap <leader>sn :lnext<cr>
@@ -94,14 +106,14 @@ let g:airline_theme='base16'
 
 " Tabs "
 """"""""
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Language specific Tabs "
 """"""""""""""""""""""""""
-autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Other options "
 """""""""""""""""
@@ -129,6 +141,7 @@ set modelines=0
 
 " turn on syntax highlighting
 syntax on
+let g:jsx_ext_required = 0 
 
 " Syntastic options "
 """""""""""""""""""""
@@ -142,7 +155,7 @@ let g:syntastic_check_on_open               = 1
 let g:syntastic_check_on_wq                 = 0
 
 let g:syntastic_ruby_checkers               = ['rubocop', 'mri']
-let g:syntastic_javascript_checkers         = ['jshint']
+let g:syntastic_javascript_checkers         = ['eslint']
 "let g:syntastic_ruby_rubocop_exec           = '/Users/chris/.rbenv/shims/rubocop'
 let g:syntastic_enable_signs                = 1
 let g:syntastic_auto_jump                   = 0
@@ -170,3 +183,18 @@ let g:sort_motion_flags = "i"
 
 "This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
+
+" Lets me use space-e to expand emmet abbreviations
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+nmap <leader>e <C-y>,i
+
+" enable AutoSave on Vim startup
+let g:auto_save = 1
+
+" GuiFont DroidSansMonoForPowerline Nerd Font:h11
+" set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h11
+let g:webdevicons_enable_nerdtree = 1
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+
+let g:ctrlp_working_path_mode = 'ra'
+

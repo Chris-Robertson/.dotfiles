@@ -94,5 +94,14 @@ source ~/.alias
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+# Add path for pastgres
+PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
 # Enables vi-style commands in the shell
 set -o vi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
