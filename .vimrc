@@ -1,3 +1,58 @@
+" --- Use 'gx' to follow any URL ---
+
+" --- Plug Start ---
+" https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+
+" --- Fuzzy Search ---
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" --- Tools ---
+Plug 'https://github.com/junegunn/vim-plug'
+Plug '907th/vim-auto-save'
+
+Plug 'christoomey/vim-sort-motion'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-user'
+Plug 'mattn/emmet-vim'
+Plug 'morhetz/gruvbox'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'rizzatti/dash.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'Valloric/YouCompleteMe'
+Plug 'ternjs/tern_for_vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'ianks/vim-tsx'
+" Plug 'Quramy/tsuquyomi'
+Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'vim-scripts/Emmet.vim'
+Plug 'vim-scripts/WebAPI.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'elzr/vim-json'
+Plug 'digitaltoad/vim-pug'
+Plug 'w0rp/ale'
+Plug 'tpope/vim-obsession'
+
+call plug#end()
+" --- Plug End ---
+
 set nocompatible              " be iMproved, required
 filetype on                  " required
 filetype indent on
@@ -5,61 +60,6 @@ filetype plugin on
 
 " export PATH="$PATH:$HOME/.rvm/bin"
 set encoding=utf8
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin 'christoomey/vim-system-copy'
-" Plugin 'scrooloose/nerdcommenter'
-" Plugin 'svermeulen/vim-easyclip'
-Plugin '907th/vim-auto-save'
-Plugin 'christoomey/vim-sort-motion'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kana/vim-textobj-entire'
-Plugin 'kana/vim-textobj-indent'
-Plugin 'kana/vim-textobj-line'
-Plugin 'kana/vim-textobj-user'
-Plugin 'mattn/emmet-vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'rizzatti/dash.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-rails'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-syntastic/syntastic'
-" Plugin 'leafgarland/typescript-vim'
-" Plugin 'ianks/vim-tsx'
-" Plugin 'Quramy/tsuquyomi'
-" Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-" Must load last
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'tpope/vim-obsession'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 " Leader Key "
 """"""""""""""
@@ -77,6 +77,8 @@ nnoremap <leader>d /def<CR>
 
 nnoremap <leader>sn :lnext<cr>
 nnoremap <leader>sp :lprev<cr>
+
+nnoremap <leader>f :FZF<cr>
 
 " Keymappings "
 """""""""""""""
@@ -120,6 +122,7 @@ set expandtab
 set autoindent
 set backspace=indent,eol,start
 set cursorline
+set cursorcolumn
 set encoding=utf-8
 set hidden
 set hlsearch
@@ -136,29 +139,33 @@ set visualbell
 set wildmenu
 set wildmode=list:longest
 
+set shortmess=
+set cmdheight=2
+
 " prevents security exploits with modelines
 set modelines=0
 
 " turn on syntax highlighting
 syntax on
 let g:jsx_ext_required = 0 
+let g:javascript_plugin_flow = 1
 
 " Syntastic options "
 """""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list    = 1
-let g:syntastic_auto_loc_list               = 1
-let g:syntastic_check_on_open               = 1
-let g:syntastic_check_on_wq                 = 0
+" let g:syntastic_always_populate_loc_list    = 1
+" let g:syntastic_auto_loc_list               = 1
+" let g:syntastic_check_on_open               = 1
+" let g:syntastic_check_on_wq                 = 0
 
-let g:syntastic_ruby_checkers               = ['rubocop', 'mri']
-let g:syntastic_javascript_checkers         = ['eslint']
-"let g:syntastic_ruby_rubocop_exec           = '/Users/chris/.rbenv/shims/rubocop'
-let g:syntastic_enable_signs                = 1
-let g:syntastic_auto_jump                   = 0
+" let g:syntastic_ruby_checkers               = ['rubocop', 'mri']
+" let g:syntastic_javascript_checkers         = ['eslint']
+" "let g:syntastic_ruby_rubocop_exec           = '/Users/chris/.rbenv/shims/rubocop'
+" let g:syntastic_enable_signs                = 1
+" let g:syntastic_auto_jump                   = 0
 
 " NERDCommenter options "
 """""""""""""""""""""""""
@@ -176,7 +183,6 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
-"
 
 " Sets the sort-motion plugin to be case-insensitive
 let g:sort_motion_flags = "i"
@@ -185,16 +191,12 @@ let g:sort_motion_flags = "i"
 nnoremap <CR> :noh<CR><CR>
 
 " Lets me use space-e to expand emmet abbreviations
-" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 nmap <leader>e <C-y>,i
+
+" Use a custom emmet snippets file
+let g:user_emmet_settings = webapi#json#decode(
+\  join(readfile(expand('~/.snippets.json')), "\n"))
 
 " enable AutoSave on Vim startup
 let g:auto_save = 1
-
-" GuiFont DroidSansMonoForPowerline Nerd Font:h11
-" set guifont=DroidSansMonoForPowerline\ Nerd\ Font:h11
-let g:webdevicons_enable_nerdtree = 1
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
-
-let g:ctrlp_working_path_mode = 'ra'
-
