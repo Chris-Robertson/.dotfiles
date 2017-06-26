@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " --- Auto-Completion
 Plug 'jiangmiao/auto-pairs'
 Plug 'ternjs/tern_for_vim'
-Plug 'Valloric/YouCompleteMe'                   , {'do':  './install.py --tern-completer'}
+Plug 'Valloric/YouCompleteMe'                   ", {'do':  './install.py --tern-completer'}
 
 " --- Editing ---
 Plug 'tpope/vim-commentary'
@@ -31,16 +31,21 @@ Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
 " --- Snippets ---
+" Plug 'https://github.com/SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/Emmet.vim'
 
 " --- Syntax Highlighting ---
-Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/WebAPI.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'
+Plug 'https://github.com/othree/yajs.vim'
+Plug 'https://github.com/jelera/vim-javascript-syntax'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'https://github.com/othree/es.next.syntax.vim'
 
 " --- Text Objects ---
 Plug 'christoomey/vim-sort-motion'
@@ -61,6 +66,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
+Plug 'https://github.com/tpope/vim-eunuch'
 
 call plug#end()
 " --- Plug End ---
@@ -124,7 +130,13 @@ nnoremap <CR> :noh<CR><CR>
 nmap <leader>e <C-y>,i
 
 " --- FZF ---
-nnoremap <leader>f :FZF<cr>
+nnoremap <leader>p :FZF<cr>
+
+" --- ALE ---
+
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = '/Users/chris/.nvm/versions/node/v7.10.0/bin/eslint'
+let g:ale_fixers = {'javascript': ['eslint']}
 
 " --- Look & Feel ---
 colorscheme gruvbox
@@ -132,27 +144,11 @@ colorscheme gruvbox
 let g:airline_powerline_fonts = 1 "enable powerline font
 let g:airline_theme='base16'
 
-
 " Other options "
 """""""""""""""""
 let g:jsx_ext_required = 0 
 let g:javascript_plugin_flow = 1
 
-" --- Syntastic options ---
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list    = 1
-" let g:syntastic_auto_loc_list               = 1
-" let g:syntastic_check_on_open               = 1
-" let g:syntastic_check_on_wq                 = 0
-
-" let g:syntastic_ruby_checkers               = ['rubocop', 'mri']
-" let g:syntastic_javascript_checkers         = ['eslint']
-" "let g:syntastic_ruby_rubocop_exec           = '/Users/chris/.rbenv/shims/rubocop'
-" let g:syntastic_enable_signs                = 1
-" let g:syntastic_auto_jump                   = 0
 
 " --- NERDCommenter options ---
 " Add spaces after comment delimiters by default
@@ -174,8 +170,7 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:sort_motion_flags = "i"
 
 " Use a custom emmet snippets file
-let g:user_emmet_settings = webapi#json#decode(
-\  join(readfile(expand('~/.snippets.json')), "\n"))
+" let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.snippets.json')), "\n"))
 
 " enable AutoSave on Vim startup
 let g:auto_save = 1
