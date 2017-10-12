@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " --- Auto-Completion
 Plug 'jiangmiao/auto-pairs'
 Plug 'ternjs/tern_for_vim'
-Plug 'Valloric/YouCompleteMe'                   ", {'do':  './install.py --tern-completer'}
+" Plug 'Valloric/YouCompleteMe'                   ", {'do':  './install.py --tern-completer'}
 
 " --- Editing ---
 Plug 'tpope/vim-commentary'
@@ -16,6 +16,9 @@ Plug 'tpope/vim-surround'
 " --- Fuzzy Search ---
 Plug 'https://github.com/junegunn/fzf'
 Plug 'https://github.com/junegunn/fzf.vim'
+
+" --- Games ---
+Plug 'johngrib/vim-game-code-break'
 
 " --- Linting ---
 Plug 'w0rp/ale'
@@ -99,9 +102,9 @@ set wildmode=list:longest
 set modelines=0 " prevents security exploits with modelines
 
 " --- Tabs ---
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 " autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
