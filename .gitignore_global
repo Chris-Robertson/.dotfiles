@@ -42,3 +42,8 @@ Session.vim
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# IDE files #
+#############
+.idea/
+.idea/*

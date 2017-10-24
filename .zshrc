@@ -97,15 +97,18 @@ source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
-# Add path for pastgres
+# Add path for postgres
 PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 # Enables vi-style commands in the shell
 set -o vi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export DEFAULT_USER="chris"
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
