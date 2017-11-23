@@ -12,6 +12,7 @@ Plug 'ternjs/tern_for_vim'
 " --- Editing ---
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'https://github.com/ConradIrwin/vim-bracketed-paste'
 
 " --- Fuzzy Search ---
 Plug 'https://github.com/junegunn/fzf'
@@ -82,6 +83,7 @@ filetype plugin indent on
 set encoding=utf8
 set autoindent
 set backspace=indent,eol,start
+set colorcolumn=80 " highlight column 80 for line char limits
 set cursorline
 set cursorcolumn
 set encoding=utf-8
