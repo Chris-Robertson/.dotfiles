@@ -92,11 +92,6 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.alias
 
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
-
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 # Add path for postgres
 PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
@@ -109,6 +104,4 @@ export DEFAULT_USER="chris"
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
+export PYTHON_CONFIGURE_OPTS="--enable-framework"
