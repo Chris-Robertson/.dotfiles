@@ -97,6 +97,8 @@ PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 # Enables vi-style commands in the shell
 set -o vi
+# remap escape in vi mode
+bindkey -M viins 'jj' vi-cmd-mode
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -104,4 +106,3 @@ export DEFAULT_USER="chris"
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-export PYTHON_CONFIGURE_OPTS="--enable-framework"
