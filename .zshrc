@@ -57,12 +57,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# include z
-. /usr/local/etc/profile.d/z.sh
-
-# random quote on startup, adds time to terminal startup
-#quote
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
