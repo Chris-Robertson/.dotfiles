@@ -119,7 +119,7 @@ set expandtab
 " --- Mappings ---
 let mapleader = " "
 
-inoremap jj <ESC>
+inoremap kj <ESC>
 
 nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <Tab><Tab> :NERDTreeToggle<CR>

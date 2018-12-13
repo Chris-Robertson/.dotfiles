@@ -1,6 +1,6 @@
 source ~/.vimrc
 
-imap jj <Esc>
+imap kj <Esc>
 set timeoutlen=1000 
 
 set relativenumber

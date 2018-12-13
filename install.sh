@@ -4,6 +4,9 @@
 rm -f ~/.alias
 ln -sv ~/.dotfiles/.alias ~/.alias
 
+rm -f ~/.emacs
+ln -sv ~/.dotfiles/.emacs ~/.emacs
+
 rm -f ~/.bashrc
 ln -sv ~/.dotfiles/.bashrc ~/.bashrc
 

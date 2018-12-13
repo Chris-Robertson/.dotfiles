@@ -22,7 +22,6 @@ Session.vim
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
@@ -51,5 +50,3 @@ Thumbs.db
 # Gradle #
 ##########
 .gradle/
-gradle/
-gradle*
