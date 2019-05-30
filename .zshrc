@@ -94,9 +94,17 @@ set -o vi
 # remap escape in vi mode
 bindkey -M viins 'kj' vi-cmd-mode
 
+# Fuzzy auto-complete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export AWS_DEFAULT_REGION="ap-southeast-2"
 export DEFAULT_USER="chris"
-
 export JAVA_HOME=$(/usr/libexec/java_home)
 
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/chris/.sdkman"
+[[ -s "/Users/chris/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/chris/.sdkman/bin/sdkman-init.sh"

@@ -25,9 +25,10 @@ There are two things you can do about this warning:
  '(custom-safe-themes
    (quote
     ("85968e61ff2c490f687a8159295efb06dd05764ec37a5aef2c59abbd485f0ee4" "2a9039b093df61e4517302f40ebaf2d3e95215cb2f9684c8c1a446659ee226b9" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
+ '(org-agenda-files (quote ("~/org/work.org")))
  '(package-selected-packages
    (quote
-    (powerline recover-buffers darktooth-theme flycheck ## org-evil gruvbox-theme evil))))
+    (column-enforce-mode evil-org git-auto-commit-mode magit powerline recover-buffers darktooth-theme flycheck ## gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,6 +37,7 @@ There are two things you can do about this warning:
  )
 
 ; EVIL MODE CONFIG
+(setq-default evil-want-C-u-scroll t) ; remap C-u to page up THIS MUST BE BEFORE require evil
 (require 'evil)
 (evil-mode 1)
 (setq-default evil-escape-key-sequence "kj")
@@ -44,8 +46,17 @@ There are two things you can do about this warning:
 
 (evil-define-key 'normal org-mode-map
   (kbd "TAB") 'org-cycle
-  ">" 'org-shiftmetaright
-  "<" 'org-shiftmetaleft)
+ ; ">" 'org-shiftmetaright
+ ; "<" 'org-shiftmetaleft
+)
+
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
+
+(setq evil-want-C-i-jump nil) ; fix for evil-org TAB issue https://github.com/Somelauw/evil-org-mode#common-issues
 
 ; add proselint and enable it in org-mode
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -57,8 +68,34 @@ There are two things you can do about this warning:
 (dolist (hook '(text-mode-hook org-mode-hook))
     (add-hook hook (lambda () (flyspell-mode 1))))
 
+; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+
 ; powerline
 (require 'powerline)
 (powerline-default-theme)
 
+; archive done tasks in org-mode
+; https://stackoverflow.com/a/27043756/1576860
+(defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (outline-previous-heading)))
+   "/DONE" 'agenda)) ;applies to all agenda files. Use 'file' for the current file. 'tree' for the current subtree
+
+; set the default capture file
+(setq org-default-notes-file (concat org-directory "/capture.org"))
+(define-key global-map "\C-cc" 'org-capture)
+
+; mark characters over the 80th column globally
+; https://github.com/jordonbiondo/column-enforce-mode/
+(global-column-enforce-mode t)
+
+; theme
 (load-theme 'gruvbox t)
+
+(provide '.emacs)
+;;; .emacs ends here
