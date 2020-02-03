@@ -36,6 +36,10 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  )
 
+; ;; Download Evil
+; (unless (package-installed-p 'evil)
+;   (package-install 'evil))
+
 ; EVIL MODE CONFIG
 (setq-default evil-want-C-u-scroll t) ; remap C-u to page up THIS MUST BE BEFORE require evil
 (require 'evil)
