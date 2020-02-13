@@ -4,8 +4,12 @@
 rm -f ~/.alias
 ln -sv ~/.dotfiles/.alias ~/.alias
 
-rm -f ~/.emacs
-ln -sv ~/.dotfiles/.emacs ~/.emacs
+# using spacemacs
+# rm -f ~/.emacs
+# ln -sv ~/.dotfiles/.emacs ~/.emacs
+
+rm -f ~/.spacemacs
+ln -sv ~/.dotfiles/.spacemacs ~/.spacemacs
 
 rm -f ~/.bashrc
 ln -sv ~/.dotfiles/.bashrc ~/.bashrc

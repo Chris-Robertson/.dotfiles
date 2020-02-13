@@ -182,6 +182,8 @@ z='_z 2>&1'
 
 alias tmux="TERM=screen-256color-bce tmux"
 
+alias ewo='emacs -nw ~/org/work.org'
+
 # Scripts
 #---------
 alias weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
