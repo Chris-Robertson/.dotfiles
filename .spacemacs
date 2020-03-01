@@ -38,22 +38,25 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
+     auto-completion
+     better-defaults
      emacs-lisp
-     ;; git
+     git
      helm
      ;; lsp
      markdown
      multiple-cursors
      org
+     ;; (org :variables
+     ;;      org-enable-jira-support t
+     ;;      jiralib-url "https://australiapost-productengineering.atlassian.net/:443")
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
-     treemacs
-     ;; version-control
+     ;; treemacs
+     version-control
      )
 
    ;; List of additional packages that will be installed without being
@@ -359,7 +362,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'visual
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -469,21 +472,41 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
     (setq-default evil-escape-key-sequence "kj")
     (setq-default evil-escape-delay 0.2)
+
     (setq org-agenda-files '("~/org/inbox.org"
+                             "~/org/yt.org"
+                             "~/org/inbox.org"
                              "~/org/work.org"
+                             "~/org/personal.org"
                              "~/org/tickler.org"))
+
     (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                    (file+headline "~/org/inbox.org" "Tasks")
-                                   "* TODO %i%?")
+                                   "* TODO %i%? \n %U")
                                   ("T" "Tickler" entry
                                    (file+headline "~/org/tickler.org" "Tickler")
                                    "* %i%? \n %U")))
+
     (setq org-refile-targets '(("~/org/work.org" :maxlevel . 3)
                                ("~/org/someday.org" :level . 1)
+                               ("~/org/inbox.org" :level . 1)
+                               ("~/org/yt.org" :level . 1)
+                               ("~/org/personal.org" :maxlevel . 5)
                                ("~/org/tickler.org" :maxlevel . 2)))
-    (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
-)
 
+    (setq org-todo-keywords '((sequence "TODO(t@/!)"
+                                        "WAITING(w@/!)"
+                                        "|"
+                                        "DONE(d@/!)"
+                                        "CANCELLED(c@/!)")))
+
+    (setq org-agenda-custom-commands '(("w" "Work tasks" tags-todo "@work"
+                                        (org-ag
+                                         enda-overriding-header "Work"))
+                                       ("y" "YT tasks" tags-todo "@yt"
+                                        (org-agenda-overriding-header "YT"))))
+
+)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
@@ -498,7 +521,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (gruvbox-theme autothemer ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))))
+    (yasnippet-snippets unfill treemacs-magit smeargle ox-jira orgit org-jira mwim magit-svn magit-section magit-gitflow magit-popup helm-gitignore helm-git-grep helm-company helm-c-yasnippet gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ fuzzy evil-magit magit git-commit with-editor transient company browse-at-remote auto-yasnippet yasnippet ac-ispell auto-complete gruvbox-theme autothemer ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

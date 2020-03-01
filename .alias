@@ -184,6 +184,9 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 alias ewo='emacs -nw ~/org/work.org'
 
+# DCSS
+alias crawl='ssh -l joshua crawl.akrasiac.org'
+
 # Scripts
 #---------
 alias weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
