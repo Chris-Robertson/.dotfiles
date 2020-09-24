@@ -5,3 +5,8 @@ set timeoutlen=1000
 
 set relativenumber
 set number
+
+" emulated plugins
+" https://github.com/JetBrains/ideavim/blob/master/doc/emulated-plugins.md
+set surround
+set commentary
