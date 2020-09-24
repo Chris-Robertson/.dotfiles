@@ -2,13 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/chris/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -51,7 +50,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cloudapp extract brew osx sudo rand-quote battery)
+plugins=(git extract brew osx sudo rand-quote battery)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,7 +97,7 @@ bindkey -M viins 'kj' vi-cmd-mode
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
-export DEFAULT_USER="chris"
+export DEFAULT_USER="chris.robertsonauspost.com.au"
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 export NVM_DIR="$HOME/.nvm"
@@ -106,7 +105,7 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/chris/.sdkman"
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
 [[ -s "/Users/chris/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/chris/.sdkman/bin/sdkman-init.sh"
-
 export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_FALLBACK_LIBRARY_PATH
