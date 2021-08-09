@@ -182,7 +182,8 @@ z='_z 2>&1'
 
 alias tmux="TERM=screen-256color-bce tmux"
 
-alias ewo='emacs -nw ~/org/work.org'
+# alias ewo='emacs -nw ~/org/work.org'
+alias ewo='emacs ~/org/work.org'
 
 # DCSS
 alias crawl='ssh -l joshua crawl.akrasiac.org'
@@ -190,3 +191,11 @@ alias crawl='ssh -l joshua crawl.akrasiac.org'
 # Scripts
 #---------
 alias weather='curl -4 wttr.in' # Prints the weather forcast in the terminal
+
+# AWS
+#---------
+alias eapdev='export AWS_PROFILE=ap-dev'
+alias eaptest='export AWS_PROFILE=ap-test'
+alias eapprod='export AWS_PROFILE=ap-prod'
+
+alias rm=trash
