@@ -3,6 +3,7 @@
 " --- Plug Start ---
 " https://github.com/junegunn/vim-plug
 " Install plugin manager if it is missing
+" commands: PlugInstall, PlugUpdate
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -170,7 +171,9 @@ let g:ale_javascript_eslint_executable = '/Users/chris/.nvm/versions/node/v7.10.
 let g:ale_fixers = {'javascript': ['eslint']}
 
 " --- Look & Feel ---
+set termguicolors
 colorscheme gruvbox
+set bg=dark
 
 let g:airline_powerline_fonts = 1 "enable powerline font
 let g:airline_theme='base16'
