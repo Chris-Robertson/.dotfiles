@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 
 " --- Auto-Completion
 Plug 'jiangmiao/auto-pairs'
-Plug 'ternjs/tern_for_vim'
+" Plug 'ternjs/tern_for_vim'
 " Plug 'Valloric/YouCompleteMe'                   ", {'do':  './install.py --tern-completer'}
 
 " --- Editing ---
@@ -37,7 +37,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " --- Org Mode ---
-Plug 'jceb/vim-orgmode'
+" Plug 'jceb/vim-orgmode'
 Plug 'vim-scripts/utl.vim'
 Plug 'https://github.com/tpope/vim-speeddating'
 Plug 'https://github.com/inkarkat/vim-SyntaxRange'
@@ -45,9 +45,9 @@ Plug 'https://github.com/mattn/calendar-vim'
 Plug 'https://github.com/majutsushi/tagbar'
 
 " --- Ruby ---
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
+" Plug 'nelstrom/vim-textobj-rubyblock'
+" Plug 'tpope/vim-rails'
+" Plug 'vim-ruby/vim-ruby'
 
 " --- Snippets ---
 " Plug 'https://github.com/SirVer/ultisnips'
@@ -56,15 +56,15 @@ Plug 'vim-scripts/Emmet.vim'
 
 " --- Syntax Highlighting - MISC ---
 " Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/WebAPI.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'vim-scripts/WebAPI.vim'
+" Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'elzr/vim-json'
-Plug 'digitaltoad/vim-pug'
-Plug 'https://github.com/othree/yajs.vim'
-Plug 'https://github.com/jelera/vim-javascript-syntax'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'pangloss/vim-javascript'
-Plug 'https://github.com/othree/es.next.syntax.vim'
+" Plug 'digitaltoad/vim-pug'
+" Plug 'https://github.com/othree/yajs.vim'
+" Plug 'https://github.com/jelera/vim-javascript-syntax'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript'
+" Plug 'https://github.com/othree/es.next.syntax.vim'
 
 " --- Syntax Highlighting - YAML ---
 "  https://github.com/stephpy/vim-yaml
@@ -78,12 +78,12 @@ Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 
 " --- TMUX ---
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 
 " --- Tools ---
 Plug 'https://github.com/junegunn/vim-plug'
 Plug '907th/vim-auto-save'
-Plug 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
@@ -171,7 +171,7 @@ let g:ale_javascript_eslint_executable = '/Users/chris/.nvm/versions/node/v7.10.
 let g:ale_fixers = {'javascript': ['eslint']}
 
 " --- Look & Feel ---
-set termguicolors
+" set termguicolors "Fucks colours in TMUX
 colorscheme gruvbox
 set bg=dark
 
