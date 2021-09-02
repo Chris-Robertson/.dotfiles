@@ -1,12 +1,7 @@
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-# Config files
-alias zconf="vim ~/.zshrc"
-alias aconf="vim ~/.alias"
-alias vimconf="vim ~/.vimrc"
-alias tmuxconf="vim ~/.tmux.conf"
+# ----------------------------------------------------------------------------
+# All these aliases that don't start with `alias=` are added by oh-my-zsh 
+# plugins and are just recorded here for visibility.
+# To add a new alias, go to the section at the bottom of this file.
 
 #alias -='cd -'
 #...=../..
@@ -180,12 +175,24 @@ showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true && killa
 x=extract
 z='_z 2>&1'
 
+# ----------------------------------------------------------------------------
+# My Aliases
+
+# Git
+#---------
+alias glss='git log --show-signature'
+
+# TMUX
+#---------
 alias tmux="TERM=screen-256color-bce tmux"
 
-# alias ewo='emacs -nw ~/org/work.org'
-alias ewo='emacs ~/org/work.org'
+# Emacs
+#---------
+alias ewo='emacs -nw ~/org/work/work.org'
+alias epo='emacs -nw ~/org/personal/personal.org'
 
 # DCSS
+#---------
 alias crawl='ssh -l joshua crawl.akrasiac.org'
 
 # Scripts
@@ -198,4 +205,19 @@ alias eapdev='export AWS_PROFILE=ap-dev'
 alias eaptest='export AWS_PROFILE=ap-test'
 alias eapprod='export AWS_PROFILE=ap-prod'
 
+# Trash
+#---------
 alias rm=trash
+
+# cd
+#---------
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# dotfiles
+#---------
+alias zconf="vim ~/.zshrc"
+alias aconf="vim ~/.alias"
+alias vimconf="vim ~/.vimrc"
+alias tmuxconf="vim ~/.tmux.conf"
