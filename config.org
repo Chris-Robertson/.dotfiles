@@ -79,7 +79,7 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
   
 * Font
   #+begin_src emacs-lisp
-    (set-face-attribute 'default nil :font "Hack" :height 140)
+    (set-face-attribute 'default nil :font "Hack" :height 160)
   #+end_src
 
 
@@ -107,56 +107,97 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
 
   
 * Look and Feel
-  #+begin_src emacs-lisp
-    ;; Don't show the splash screen
-    (setq inhibit-startup-message t)
+** To Sort
+   #+begin_src emacs-lisp
+     ;; Don't show the splash screen
+     (setq inhibit-startup-message t)
 
-    ;; Start emacs window maximised
-    ;; the t parameter apends to the hook, instead of prepending
-    ;; this means it'd be run after other hooks that might fiddle
-    ;; with the frame size
-    ;; https://emacsredux.com/blog/2020/12/04/maximize-the-emacs-frame-on-startup/
-    (add-hook 'window-setup-hook 'toggle-frame-maximized t)
+     ;; Start emacs window maximised
+     ;; the t parameter apends to the hook, instead of prepending
+     ;; this means it'd be run after other hooks that might fiddle
+     ;; with the frame size
+     ;; https://emacsredux.com/blog/2020/12/04/maximize-the-emacs-frame-on-startup/
+     (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
-    (tool-bar-mode -1)      ; Disable the chunky toolbar
-    (tooltip-mode -1)       ; Disable tooltips
-    (menu-bar-mode -1)      ; Disable the top menu bar
+     (tool-bar-mode -1)      ; Disable the chunky toolbar
+     (tooltip-mode -1)       ; Disable tooltips
+     (menu-bar-mode -1)      ; Disable the top menu bar
 
-    ;; these don't seem to work in terminal mode
-    (scroll-bar-mode -1)    ; Disable visible scrollbar
-    (set-fringe-mode 25)    ; Add left and right margins
+     ;; these don't seem to work in terminal mode
+     (scroll-bar-mode -1)    ; Disable visible scrollbar
+     (set-fringe-mode 25)    ; Add left and right margins
 
-    (setq visible-bell t)    ; Stop beeping at me!
+     (setq visible-bell t)    ; Stop beeping at me!
 
-    (use-package all-the-icons)
-    ;; Run ~M-x all-the-icons-install-fonts~ after first setup to
-    ;; install icon fonts
+     (use-package all-the-icons)
+     ;; Run ~M-x all-the-icons-install-fonts~ after first setup to
+     ;; install icon fonts
 
-    (column-number-mode t) ; Show column number in mode line
+     (column-number-mode t) ; Show column number in mode line
 
-    (global-display-line-numbers-mode 0)
+     (global-display-line-numbers-mode 0)
 
-    (use-package rainbow-delimiters
-      :hook
-      (prog-mode . rainbow-delimiters-mode))
+     (use-package rainbow-delimiters
+       :hook
+       (prog-mode . rainbow-delimiters-mode))
 
-    ;;(use-package prism)
+     ;;(use-package prism)
 
-  #+end_src
+   #+end_src
+
 
 ** Mac Settings
+
    https://medium.com/really-learn-programming/configuring-emacs-on-macos-a6c5a0a8b9fa
+
    #+begin_src emacs-lisp
-     ;; only run when on mac system
+
+     ;; use this to print all monitor attributes
+     ;; (display-monitor-attributes-list)
+
+     ;;  ;; macbook screen
+     ;; (((geometry 0 0 1792 1120)
+     ;;   (workarea 0 25 1792 1095)
+     ;;   (mm-size 344 214)
+     ;;   (frames)
+     ;;   (source . "NS"))
+
+     ;;  ;; top monitor
+     ;;  ((geometry 769 -1080 1920 1080)
+     ;;   (workarea 769 -1080 1920 1055)
+     ;;   (mm-size 524 294)
+     ;;   (frames #<frame config.org 0x7fb11082ee30>)
+     ;;   (source . "NS"))
+
+     ;;  ;; main monitor
+     ;;  ((geometry 1792 0 2560 1440)
+     ;;   (workarea 1792 0 2560 1415)
+     ;;   (mm-size 596 335)
+     ;;   (frames)
+     ;;   (source . "NS")))
+
+     ;; use this for testing frame position
+     ;;(modify-frame-parameters (make-frame) '((top . 100) (left . 1900)))
+
      (when (equal system-type 'darwin)
 
-       (setq default-frame-alist
-	     '((top + -769) (left + 1080)))
-       (setq initial-frame-alist
-	     '((top + -769) (left + 1080)))
-       )
+       ;; open on top monitor
+       ;; (setq default-frame-alist
+       ;; 	'((top + -769) (left + 1080)))
+       ;; (setq initial-frame-alist
+       ;; 	'((top + -769) (left + 1080))))
 
-     ;;(modify-frame-parameters (make-frame) '((top + -769) (left + 1080)))
+       ;; open on main monitor
+       (setq default-frame-alist
+	     '((top . 100) (left . 1900) (width . 200) (height . 450)))
+       (setq initial-frame-alist
+	     '((top . 100) (left . 1900) (width . 200) (height . 450))))
+
+     ;; Open on main monitor
+     ;;(setq default-frame-alist
+     ;;'((top + 100) (left + 1900)))
+     ;;(setq initial-frame-alist
+     ;;'((top + 100) (left + 1900))))
 
      ;; swaps cmd and alt. Should only need if using macbook keyboard
      ;;(setq mac-command-modifier 'meta)
@@ -171,6 +212,7 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
      ;;(add-to-list 'default-frame-alist '(font . "Fira Code-14")))
      ;;(set-fontset-font t 'symbol (font-spec :family "Apple Symbols") nil 'prepend)
      ;;(set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
+
    #+end_src
    
 
@@ -186,7 +228,7 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
 
     (set-face-attribute 'mode-line nil :family "Hack" :height 130)
   #+end_src
-
+  
   
 * Which Key
   #+begin_src emacs-lisp
@@ -219,8 +261,7 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
       (evil-mode 1)
       ;; Use visual line motions even outside of visual-line-mode buffers
       (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-      (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-      )
+      (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
 
     ;; https://github.com/emacs-evil/evil-collection
     (use-package evil-collection
@@ -244,7 +285,7 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
 * Ivy, Counsel
   https://oremacs.com/swiper/
   #+begin_src emacs-lisp
-    ;; Installs Ivy, Counsel and Swiper
+
     (use-package counsel
       :diminish
       :bind (("M-x" . counsel-M-x)
@@ -272,16 +313,17 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
     (use-package ivy-rich
       :init (ivy-rich-mode 1)
       :config
-      (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-      )
+      (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
     (global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
+
   #+end_src
 
 
 * Helpful
   https://github.com/Wilfred/helpful
   #+begin_src emacs-lisp
+
     (use-package helpful
       :custom
       (counsel-describe-function-function #'helpful-callable)
@@ -290,8 +332,8 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
       ([remap describe-function] . counsel-describe-function)
       ([remap describe-command] . helpful-command)
       ([remap describe-variable] . counsel-describe-variable)
-      ([remap describe-key] . helpful-key)
-      )
+      ([remap describe-key] . helpful-key))
+
   #+end_src
 
 
@@ -311,21 +353,38 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
    https://github.com/integral-dw/org-superstar-mode
    #+begin_src emacs-lisp
      (use-package org-superstar
-      :after org
-      :hook
-      (org-mode . org-superstar-mode))
+       :after org
+       :hook
+       (org-mode . org-superstar-mode))
 
    #+end_src
  
+** Writeroom
+   https://github.com/joostkremers/writeroom-mode
+   #+begin_src emacs-lisp
+
+     (use-package writeroom-mode
+       :init
+       (setq writeroom-width 0.6) ; % of window width
+       (setq writeroom-maximize-window 0)
+       (setq writeroom-mode-line t)
+       (setq writeroom-header-line t)
+       (setq writeroom-fullscreen-effect 'maximized)
+       (setq writeroom-major-modes '(org-mode text-mode))
+       :config
+       (global-writeroom-mode t))
+
+   #+end_src
+
 ** Keybinds
    #+begin_src emacs-lisp
-     ;; org-mode leader keys
+
      (cxr/leader-keys
        "o"     '(:ignore t :which-key "org")
        "oR"    '(org-mode-restart :which-key "restart"))
 
    #+end_src
-
+   
   
 * Org Roam
   https://www.orgroam.com/manual.html
@@ -346,4 +405,5 @@ https://githublists.com/lists/emacs-tw/awesome-emacs
       "ori" '(org-roam-node-insert :which-key "insert node"))
 
   #+end_src
+
 

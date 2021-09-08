@@ -101,16 +101,52 @@
 
 ;;(use-package prism)
 
-;; only run when on mac system
+;; use this to print all monitor attributes
+;; (display-monitor-attributes-list)
+
+;;  ;; macbook screen
+;; (((geometry 0 0 1792 1120)
+;;   (workarea 0 25 1792 1095)
+;;   (mm-size 344 214)
+;;   (frames)
+;;   (source . "NS"))
+
+;;  ;; top monitor
+;;  ((geometry 769 -1080 1920 1080)
+;;   (workarea 769 -1080 1920 1055)
+;;   (mm-size 524 294)
+;;   (frames #<frame config.org 0x7fb11082ee30>)
+;;   (source . "NS"))
+
+;;  ;; main monitor
+;;  ((geometry 1792 0 2560 1440)
+;;   (workarea 1792 0 2560 1415)
+;;   (mm-size 596 335)
+;;   (frames)
+;;   (source . "NS")))
+
+;; use this for testing frame position
+;;(modify-frame-parameters (make-frame) '((top . 100) (left . 1900)))
+
 (when (equal system-type 'darwin)
 
-  (setq default-frame-alist
-	'((top + -769) (left + 1080)))
-  (setq initial-frame-alist
-	'((top + -769) (left + 1080)))
-  )
+  ;; open on top monitor
+  ;; (setq default-frame-alist
+  ;; 	'((top + -769) (left + 1080)))
+  ;; (setq initial-frame-alist
+  ;; 	'((top + -769) (left + 1080))))
 
-;;(modify-frame-parameters (make-frame) '((top + -769) (left + 1080)))
+  ;; open on main monitor
+  (setq default-frame-alist
+	'((top . 100) (left . 1900) (width . 200) (height . 450)))
+  (setq initial-frame-alist
+	'((top . 100) (left . 1900) (width . 200) (height . 450))))
+
+;; Open on main monitor
+;;(setq default-frame-alist
+;;'((top + 100) (left + 1900)))
+;;(setq initial-frame-alist
+;;'((top + 100) (left + 1900))))
 
 ;; swaps cmd and alt. Should only need if using macbook keyboard
 ;;(setq mac-command-modifier 'meta)
@@ -161,8 +197,7 @@
   (evil-mode 1)
   ;; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  )
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
 
 ;; https://github.com/emacs-evil/evil-collection
 (use-package evil-collection
@@ -181,7 +216,6 @@
 :config
 (evil-escape-mode 1)
 
-;; Installs Ivy, Counsel and Swiper
 (use-package counsel
   :diminish
   :bind (("M-x" . counsel-M-x)
@@ -209,8 +243,7 @@
 (use-package ivy-rich
   :init (ivy-rich-mode 1)
   :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  )
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
 
@@ -222,8 +255,7 @@
   ([remap describe-function] . counsel-describe-function)
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key)
-  )
+  ([remap describe-key] . helpful-key))
 
 (use-package org
   :init
@@ -233,11 +265,21 @@
 	org-hide-emphasis-markers t))
 
 (use-package org-superstar
- :after org
- :hook
- (org-mode . org-superstar-mode))
+  :after org
+  :hook
+  (org-mode . org-superstar-mode))
 
-;; org-mode leader keys
+(use-package writeroom-mode
+  :init
+  (setq writeroom-width 0.6) ; % of window width
+  (setq writeroom-maximize-window 0)
+  (setq writeroom-mode-line t)
+  (setq writeroom-header-line t)
+  (setq writeroom-fullscreen-effect 'maximized)
+  (setq writeroom-major-modes '(org-mode text-mode))
+  :config
+  (global-writeroom-mode t))
+
 (cxr/leader-keys
   "o"     '(:ignore t :which-key "org")
   "oR"    '(org-mode-restart :which-key "restart"))
