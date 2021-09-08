@@ -321,6 +321,14 @@
   "orf" '(org-roam-node-find   :which-key "find node")
   "ori" '(org-roam-node-insert :which-key "insert node"))
 
+(use-package toc-org
+  :hook
+  (org-mode     . toc-org-mode)
+  (makdown-mode . toc-org-mode))
+  ;; :config
+  ;; (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
+
 (cxr/leader-keys
   "o"     '(:ignore t :which-key "org")
-  "oR"    '(org-mode-restart :which-key "restart"))
+  "oo"    '(org-open-at-point :which-key "open")
+  "oR"    '(org-mode-restart  :which-key "restart"))

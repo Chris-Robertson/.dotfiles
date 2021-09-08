@@ -1,6 +1,63 @@
 #+title Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.dotfiles/init.el
 
+* TOC                                                                 :TOC_4:
+- [[#philosophy][Philosophy]]
+  - [[#literate-programming][Literate Programming]]
+  - [[#inspiration][Inspiration]]
+    - [[#lists][Lists]]
+    - [[#reference-configs][Reference Configs]]
+    - [[#blogs][Blogs]]
+- [[#package-setup][Package Setup]]
+  - [[#package][Package]]
+  - [[#use-package][Use Package]]
+- [[#evil][Evil]]
+- [[#keybinds][Keybinds]]
+  - [[#generalel][General.el]]
+  - [[#globals][Globals]]
+  - [[#leaders][Leaders]]
+      - [[#buffers][Buffers]]
+  - [[#which-key][Which Key]]
+  - [[#hydra][Hydra]]
+- [[#ui][UI]]
+  - [[#startup][Startup]]
+  - [[#font][Font]]
+  - [[#icons][Icons]]
+  - [[#doom-themes][Doom Themes]]
+  - [[#window-decorations][Window Decorations]]
+  - [[#alerts][Alerts]]
+  - [[#line-numbers][Line Numbers]]
+  - [[#parentheses][Parentheses]]
+  - [[#mac-settings][Mac Settings]]
+  - [[#tabs][Tabs]]
+  - [[#doom-modeline][Doom Modeline]]
+  - [[#writeroom][Writeroom]]
+- [[#info][Info]]
+  - [[#ivy][Ivy]]
+    - [[#counsel][Counsel]]
+    - [[#ivy-rich][Ivy Rich]]
+    - [[#keybinds-1][Keybinds]]
+  - [[#helpful][Helpful]]
+- [[#org][Org]]
+  - [[#package-config][Package Config]]
+  - [[#stars][Stars]]
+  - [[#org-babel][Org Babel]]
+    - [[#languages][Languages]]
+    - [[#source-block-templates][Source Block Templates]]
+    - [[#auto-tangle-config-file][Auto Tangle Config File]]
+    - [[#keybinds-2][Keybinds]]
+  - [[#org-roam][Org Roam]]
+    - [[#package-config-1][Package Config]]
+    - [[#keybinds-3][Keybinds]]
+  - [[#toc][TOC]]
+  - [[#jira][Jira]]
+  - [[#keybinds-4][Keybinds]]
+- [[#development][Development]]
+  - [[#bash][Bash]]
+  - [[#elisp][Elisp]]
+  - [[#java][Java]]
+  - [[#python][Python]]
+
 * Philosophy
 
 ** Literate Programming
@@ -491,9 +548,13 @@
 
 * Org
 
+  https://orgmode.org/manual/index.html
+  https://orgmode.org/worg/
+
 ** Package Config
 
    #+begin_src emacs-lisp
+
      (use-package org
        :init
        (setq org-startup-folded t)
@@ -503,7 +564,6 @@
        (org-indent-mode 1))
 
    #+end_src
-
 
 
 ** Stars
@@ -620,13 +680,35 @@
 
 
 
+** TOC
+
+   https://github.com/snosov1/toc-org
+
+   #+begin_src emacs-lisp
+
+     (use-package toc-org
+       :hook
+       (org-mode     . toc-org-mode)
+       (makdown-mode . toc-org-mode))
+       ;; :config
+       ;; (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
+
+   #+end_src
+
+
+** Jira
+
+   https://github.com/ahungry/org-jira
+   
+
 ** Keybinds
 
    #+begin_src emacs-lisp
 
      (cxr/leader-keys
        "o"     '(:ignore t :which-key "org")
-       "oR"    '(org-mode-restart :which-key "restart"))
+       "oo"    '(org-open-at-point :which-key "open")
+       "oR"    '(org-mode-restart  :which-key "restart"))
 
    #+end_src
 
