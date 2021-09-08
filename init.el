@@ -5,6 +5,7 @@
                          ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
+
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -14,15 +15,7 @@
 
 (require 'use-package)
 
-(setq use-package-always-ensure t)
-
-(use-package general
-  :config
-  (general-create-definer cxr/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC")
-  (general-auto-unbind-keys))
+(setq use-package-always-ensure t) ; don't confirm package installs
 
 ;; needed for evil undo. There's a built-in in emacs 28 I should check out
 (use-package undo-tree
@@ -63,16 +56,46 @@
 :config
 (evil-escape-mode 1)
 
+(use-package general
+  :config
+  (general-create-definer cxr/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  (general-auto-unbind-keys))
+
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (cxr/leader-keys
-  "t"   '(:ignore t :which-key "toggles")
   "b"   '(:ignore t :which-key "buffers")
   "bb"  '(counsel-switch-buffer              :which-key "switch buffer")
   "TAB" '(evil-switch-to-windows-last-buffer :which-key "switch to last buffer"))
 
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+;; Don't show the splash screen
+(setq inhibit-startup-message t)
+
+;; Start emacs window maximised
+;; the t parameter apends to the hook, instead of prepending
+;; this means it'd be run after other hooks that might fiddle
+;; with the frame size
+;; https://emacsredux.com/blog/2020/12/04/maximize-the-emacs-frame-on-startup/
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
+
+;; default
 (set-face-attribute 'default nil :font "Hack" :height 160)
+
+;; Larry (old work macbook)
+(when (equal system-name "Larry") 
+  (set-face-attribute 'default nil :font "Hack" :height 140))
+
+(use-package all-the-icons)
 
 (use-package doom-themes
   :ensure t
@@ -93,29 +116,15 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;; Don't show the splash screen
-(setq inhibit-startup-message t)
-
-;; Start emacs window maximised
-;; the t parameter apends to the hook, instead of prepending
-;; this means it'd be run after other hooks that might fiddle
-;; with the frame size
-;; https://emacsredux.com/blog/2020/12/04/maximize-the-emacs-frame-on-startup/
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)
-
 (tool-bar-mode -1)      ; Disable the chunky toolbar
 (tooltip-mode -1)       ; Disable tooltips
 (menu-bar-mode -1)      ; Disable the top menu bar
 
 ;; these don't seem to work in terminal mode
 (scroll-bar-mode -1)    ; Disable visible scrollbar
-(set-fringe-mode 25)    ; Add left and right margins
+(set-fringe-mode 0)     ; Add left and right margins. Handled by writeroom now
 
 (setq visible-bell t)    ; Stop beeping at me!
-
-(use-package all-the-icons)
-;; Run ~M-x all-the-icons-install-fonts~ after first setup to
-;; install icon fonts
 
 (column-number-mode t) ; Show column number in mode line
 
@@ -125,7 +134,7 @@
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
-;;(use-package prism)
+;;(use-package prism) ; not sure if I like this one
 
 ;; use this to print all monitor attributes
 ;; (display-monitor-attributes-list)
@@ -192,7 +201,6 @@
 (setq-default evil-shift-width tab-width)
 (setq-default indent-tabs-mode nil)
 
-;; https://github.com/seagle0128/doom-modeline
 (use-package doom-modeline
   :ensure t
   :init
@@ -202,11 +210,16 @@
 
 (set-face-attribute 'mode-line nil :family "Hack" :height 130)
 
-(use-package which-key
-  :init (which-key-mode)
-  :diminish which-key-mode
+(use-package writeroom-mode
+  :init
+  (setq writeroom-width 0.6) ; % of window width
+  (setq writeroom-maximize-window 0)
+  (setq writeroom-mode-line t)
+  (setq writeroom-header-line t)
+  (setq writeroom-fullscreen-effect 'maximized)
+  (setq writeroom-major-modes '(org-mode text-mode))
   :config
-  (setq which-key-idle-delay 0.3))
+  (global-writeroom-mode t))
 
 (use-package counsel
   :diminish
@@ -264,26 +277,6 @@
   :hook
   (org-mode . org-superstar-mode))
 
-(use-package writeroom-mode
-  :init
-  (setq writeroom-width 0.6) ; % of window width
-  (setq writeroom-maximize-window 0)
-  (setq writeroom-mode-line t)
-  (setq writeroom-header-line t)
-  (setq writeroom-fullscreen-effect 'maximized)
-  (setq writeroom-major-modes '(org-mode text-mode))
-  :config
-  (global-writeroom-mode t))
-
-(cxr/leader-keys
-  "o"     '(:ignore t :which-key "org")
-  "oR"    '(org-mode-restart :which-key "restart"))
-
-(require 'org-tempo)
-
-(add-to-list 'org-structure-template-alist '("p"  . "src python :python python3"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -293,10 +286,10 @@
 
 (setq org-confirm-babel-evaluate nil)
 
-(cxr/leader-keys
-  "ob"  '(:ignore t                   :which-key "babel")
-  "obe" '(org-babel-execute-src-block :which-key "execute block")
-  "obt" '(org-babel-tangle            :which-key "tangle"))
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("p"  . "src python :python python3"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 
 (defun cxr/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
@@ -307,6 +300,11 @@
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cxr/org-babel-tangle-config)))
+
+(cxr/leader-keys
+  "ob"  '(:ignore t                   :which-key "babel")
+  "obe" '(org-babel-execute-src-block :which-key "execute block")
+  "obt" '(org-babel-tangle            :which-key "tangle"))
 
 (use-package org-roam
   :init
@@ -322,3 +320,7 @@
   "orc" '(org-roam-capture     :which-key "capture")
   "orf" '(org-roam-node-find   :which-key "find node")
   "ori" '(org-roam-node-insert :which-key "insert node"))
+
+(cxr/leader-keys
+  "o"     '(:ignore t :which-key "org")
+  "oR"    '(org-mode-restart :which-key "restart"))
