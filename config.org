@@ -49,6 +49,7 @@
   - [[#org-roam][Org Roam]]
     - [[#package-config-1][Package Config]]
     - [[#keybinds-3][Keybinds]]
+  - [[#org-capture][Org Capture]]
   - [[#toc][TOC]]
   - [[#jira][Jira]]
   - [[#keybinds-4][Keybinds]]
@@ -74,6 +75,7 @@
 
 *** Reference Configs
 
+    https://github.com/daviwil/dotfiles/blob/master/Emacs.org
     https://github.com/mwfogleman/.emacs.d/blob/master/michael.org
     https://zzamboni.org/post/my-emacs-configuration-with-commentary/
 
@@ -82,7 +84,7 @@
 
     https://planet.emacslife.com/
     https://oremacs.com/
-
+    
 
 * Package Setup
 
@@ -679,6 +681,10 @@
 
 
 
+
+** Org Capture
+
+   https://github.com/progfolio/doct
 
 ** TOC
 
