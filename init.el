@@ -1,8 +1,8 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org"   . "https://orgmode.org/elpa/")
-                         ("elpa"  . "https://elpa.gnu.org/packages/")))
+			 ("org"   . "https://orgmode.org/elpa/")
+			 ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -16,6 +16,23 @@
 
 (setq use-package-always-ensure t)
 
+(use-package general
+  :config
+  (general-create-definer cxr/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  (general-auto-unbind-keys))
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+(cxr/leader-keys
+  "t"     '(:ignore t :which-key "toggles")
+  "b"     '(:ignore t :which-key "buffers")
+  "bb"    '(counsel-switch-buffer              :which-key "switch buffer")
+  "b TAB" '(evil-switch-to-windows-last-buffer :which-key "switch to last buffer"))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -25,23 +42,9 @@
 
 (setq org-confirm-babel-eveluate nil)
 
-(use-package general
-  :config
-  (general-create-definer cxr/leader-keys
-                          :keymaps '(normal insert visual emacs)
-                          :prefix "SPC"
-                          :global-prefix "C-SPC")
-  (general-auto-unbind-keys))
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
 (cxr/leader-keys
- "t"     '(:ignore t :which-key "toggles")
- "b"     '(:ignore t :which-key "buffers")
- "bb"    '(counsel-switch-buffer              :which-key "switch buffer")
- "b TAB" '(evil-switch-to-windows-last-buffer :which-key "switch to last buffer")
- )
+  "ob" '(:ignore t        :which-key "babel")
+  "obt"  '(org-babel-tangle :which-key "tangle"))
 
 (set-face-attribute 'default nil :font "Hack" :height 140)
 
@@ -50,7 +53,7 @@
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+	doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-palenight t)
   ;;(load-theme 'doom-outrun-electric t)
 
@@ -78,24 +81,50 @@
 (tooltip-mode -1)       ; Disable tooltips
 (menu-bar-mode -1)      ; Disable the top menu bar
 
-                                        ; these don't seem to work in terminal mode
-                                        ;(scroll-bar-mode -1)    ; Disable visible scrollbar
-                                        ;(set-fringe-mode 25)    ; Add left and right margins
+;; these don't seem to work in terminal mode
+(scroll-bar-mode -1)    ; Disable visible scrollbar
+(set-fringe-mode 25)    ; Add left and right margins
 
 (setq visible-bell t)    ; Stop beeping at me!
+
 (use-package all-the-icons)
 ;; Run ~M-x all-the-icons-install-fonts~ after first setup to
 ;; install icon fonts
 
 (column-number-mode t) ; Show column number in mode line
 
-(global-display-line-numbers-mode t)
+(global-display-line-numbers-mode 0)
 
 (use-package rainbow-delimiters
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
-                                        ;(use-package prism)
+;;(use-package prism)
+
+;; only run when on mac system
+(when (equal system-type 'darwin)
+
+  (setq default-frame-alist
+	'((top + -769) (left + 1080)))
+  (setq initial-frame-alist
+	'((top + -769) (left + 1080)))
+  )
+
+;;(modify-frame-parameters (make-frame) '((top + -769) (left + 1080)))
+
+;; swaps cmd and alt. Should only need if using macbook keyboard
+;;(setq mac-command-modifier 'meta)
+;;(setq mac-option-modifier 'super)
+
+
+;;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;;(add-to-list 'default-frame-alist '(ns-appearance . dark)))
+
+;;(when (member "Fira Code" (font-family-list))
+;;(add-to-list 'initial-frame-alist '(font . "Fira Code-14"))
+;;(add-to-list 'default-frame-alist '(font . "Fira Code-14")))
+;;(set-fontset-font t 'symbol (font-spec :family "Apple Symbols") nil 'prepend)
+;;(set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 ;; https://github.com/seagle0128/doom-modeline
 (use-package doom-modeline
@@ -156,23 +185,23 @@
 (use-package counsel
   :diminish
   :bind (("M-x" . counsel-M-x)
-         ("C-x b" . counsel-ibuffer)
-         ("C-x C-f" . counsel-find-file)
-         :map minibuffer-local-map
-         ("C-s" . swiper)
-         ("C-r" . 'counsel-minibuffer-history)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)	
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-s" . swiper)
+	 ("C-r" . 'counsel-minibuffer-history)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)	
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
@@ -197,19 +226,21 @@
   )
 
 (use-package org
+  :init
+  (setq org-startup-folded t)
   :config
   (setq org-ellipsis " ▾"
-        org-hide-emphasis-markers t))
+	org-hide-emphasis-markers t))
 
-;; https://github.com/integral-dw/org-superstar-mode
 (use-package org-superstar
-  :config
-  (org-superstar-mode 1))
+ :after org
+ :hook
+ (org-mode . org-superstar-mode))
 
 ;; org-mode leader keys
 (cxr/leader-keys
- "o"     '(:ignore t :which-key "org")
- "oR"    '(org-mode-restart :which-key "restart"))
+  "o"     '(:ignore t :which-key "org")
+  "oR"    '(org-mode-restart :which-key "restart"))
 
 (use-package org-roam
   :init
@@ -221,7 +252,7 @@
 
 ;; org-roam leader keys
 (cxr/leader-keys
- "or"  '(:ignore t            :which-key "roam")
- "orc" '(org-roam-capture     :which-key "capture")
- "orf" '(org-roam-node-find   :which-key "find node")
- "ori" '(org-roam-node-insert :which-key "insert node"))
+  "or"  '(:ignore t            :which-key "roam")
+  "orc" '(org-roam-capture     :which-key "capture")
+  "orf" '(org-roam-node-find   :which-key "find node")
+  "ori" '(org-roam-node-insert :which-key "insert node"))
