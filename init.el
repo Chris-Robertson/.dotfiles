@@ -1,8 +1,8 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org"   . "https://orgmode.org/elpa/")
-			 ("elpa"  . "https://elpa.gnu.org/packages/")))
+                         ("org"   . "https://orgmode.org/elpa/")
+                         ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -24,36 +24,62 @@
     :global-prefix "C-SPC")
   (general-auto-unbind-keys))
 
+;; needed for evil undo. There's a built-in in emacs 28 I should check out
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1))
+
+;; https://evil.readthedocs.io/en/latest/settings.html
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-escape-key-sequence "kj")
+  (setq evil-escape-delay 0.2)
+  (setq evil-auto-indent nil)
+  :config
+  (evil-mode 1)
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
+
+;; https://github.com/emacs-evil/evil-collection
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+;; https://github.com/syl20bnr/evil-escape
+(use-package evil-escape
+  :after evil
+  :ensure t
+  :init
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-delay 0.2))
+:config
+(evil-escape-mode 1)
+
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (cxr/leader-keys
-  "t"     '(:ignore t :which-key "toggles")
-  "b"     '(:ignore t :which-key "buffers")
-  "bb"    '(counsel-switch-buffer              :which-key "switch buffer")
-  "b TAB" '(evil-switch-to-windows-last-buffer :which-key "switch to last buffer"))
+  "t"   '(:ignore t :which-key "toggles")
+  "b"   '(:ignore t :which-key "buffers")
+  "bb"  '(counsel-switch-buffer              :which-key "switch buffer")
+  "TAB" '(evil-switch-to-windows-last-buffer :which-key "switch to last buffer"))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (java . t)
-   (python . t)
-   (shell . t)))
-
-(setq org-confirm-babel-eveluate nil)
-
-(cxr/leader-keys
-  "ob" '(:ignore t        :which-key "babel")
-  "obt"  '(org-babel-tangle :which-key "tangle"))
-
-(set-face-attribute 'default nil :font "Hack" :height 140)
+(set-face-attribute 'default nil :font "Hack" :height 160)
 
 (use-package doom-themes
   :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	doom-themes-enable-italic t) ; if nil, italics is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-palenight t)
   ;;(load-theme 'doom-outrun-electric t)
 
@@ -138,9 +164,9 @@
 
   ;; open on main monitor
   (setq default-frame-alist
-	'((top . 100) (left . 1900) (width . 200) (height . 450)))
+        '((top . 100) (left . 1900) (width . 200) (height . 450)))
   (setq initial-frame-alist
-	'((top . 100) (left . 1900) (width . 200) (height . 450))))
+        '((top . 100) (left . 1900) (width . 200) (height . 450))))
 
 ;; Open on main monitor
 ;;(setq default-frame-alist
@@ -162,6 +188,10 @@
 ;;(set-fontset-font t 'symbol (font-spec :family "Apple Symbols") nil 'prepend)
 ;;(set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
+(setq-default tab-width 2)
+(setq-default evil-shift-width tab-width)
+(setq-default indent-tabs-mode nil)
+
 ;; https://github.com/seagle0128/doom-modeline
 (use-package doom-modeline
   :ensure t
@@ -178,64 +208,26 @@
   :config
   (setq which-key-idle-delay 0.3))
 
-;; needed for evil undo. There's a built-in in emacs 28 I should check out
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1))
-
-;; https://evil.readthedocs.io/en/latest/settings.html
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
-  (setq evil-undo-system 'undo-tree)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-escape-key-sequence "kj")
-  (setq evil-escape-delay 0.2)
-  :config
-  (evil-mode 1)
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
-
-;; https://github.com/emacs-evil/evil-collection
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
-;; https://github.com/syl20bnr/evil-escape
-(use-package evil-escape
-  :after evil
-  :ensure t
-  :init
-  (setq-default evil-escape-key-sequence "kj")
-  (setq-default evil-escape-delay 0.2))
-:config
-(evil-escape-mode 1)
-
 (use-package counsel
   :diminish
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-s" . swiper)
-	 ("C-r" . 'counsel-minibuffer-history)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)	
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+  :bind (("M-x"     . counsel-M-x)
+         ("C-x b"   . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-s" . swiper)
+         ("C-r" . 'counsel-minibuffer-history)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)	
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
@@ -251,18 +243,21 @@
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
+  (counsel-describe-symbol-function   #'helpful-symbol)
   :bind
   ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
+  ([remap describe-command]  . helpful-command)
+  ([remap describe-symbol]   . helpful-symbol)
   ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
+  ([remap describe-key]      . helpful-key))
 
 (use-package org
   :init
   (setq org-startup-folded t)
   :config
   (setq org-ellipsis " ▾"
-	org-hide-emphasis-markers t))
+        org-hide-emphasis-markers t)
+  (org-indent-mode 1))
 
 (use-package org-superstar
   :after org
@@ -283,6 +278,35 @@
 (cxr/leader-keys
   "o"     '(:ignore t :which-key "org")
   "oR"    '(org-mode-restart :which-key "restart"))
+
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("p"  . "src python :python python3"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (java       . t)
+   (python     . t)
+   (shell      . t)))
+
+(setq org-confirm-babel-evaluate nil)
+
+(cxr/leader-keys
+  "ob"  '(:ignore t                   :which-key "babel")
+  "obe" '(org-babel-execute-src-block :which-key "execute block")
+  "obt" '(org-babel-tangle            :which-key "tangle"))
+
+(defun cxr/org-babel-tangle-config ()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/.dotfiles/config.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cxr/org-babel-tangle-config)))
 
 (use-package org-roam
   :init
